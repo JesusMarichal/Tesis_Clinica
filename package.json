@@ -1,30 +1,18 @@
 {
-  "name": "tesis_clinica",
+  "name": "tesis_clinica_unified",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "description": "Tesis Clínica - NestJS + React + TypeScript",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "build:client": "npm run build --prefix client",
+    "build:server": "npm run build --prefix server",
+    "build": "npm run build:client && npm run build:server",
+    "start:prod": "node server/dist/main",
+    "start:dev": "npm run start:dev --prefix server",
+    "dev": "npm run dev --prefix client",
+    "dev:all": "concurrently \"npm run start:dev\" \"npm run dev\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JesusMarichal/Tesis_Clinica.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/JesusMarichal/Tesis_Clinica/issues"
-  },
-  "homepage": "https://github.com/JesusMarichal/Tesis_Clinica#readme",
   "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^17.2.4",
-    "express": "^5.2.1",
-    "nodemon": "^3.1.11",
-    "pg": "^8.18.0"
+    "concurrently": "^8.2.2"
   }
 }
