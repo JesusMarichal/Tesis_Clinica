@@ -4,10 +4,9 @@
   "description": "Tesis Clínica - NestJS + React + TypeScript",
   "scripts": {
     "install:all": "npm install --prefix server && npm install --prefix client",
-    "build:client": "npm run build --prefix client",
-    "build:server": "npm run build --prefix server",
-    "build": "npm run build:client && npm run build:server",
-    "start:prod": "node server/dist/main",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "start": "node index.js",
+    "start:prod": "node index.js",
     "start:dev": "npm run start:dev --prefix server",
     "dev": "npm run dev --prefix client",
     "dev:all": "concurrently \"npm run start:dev\" \"npm run dev\""

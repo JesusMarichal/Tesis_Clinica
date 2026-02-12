@@ -1,38 +1,16 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const path = require('path');
+/**
+ * ENTRY POINT PARA CLEAVR
+ * Este archivo redirige la ejecución al servidor NestJS compilado.
+ */
 
-// Importar Rutas
-const homeRoutes = require('./src/routes/homeRoutes');
-const authRoutes = require('./src/routes/authRoutes');
+// Asegurarse de que el servidor esté compilado antes de ejecutar
+// require('./server/dist/main');
 
-// Cargar variables de entorno
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Servir archivos estáticos (Frontend)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Rutas de la API
-app.use('/api', homeRoutes);
-app.use('/api/auth', authRoutes);
-
-// Ruta principal para el Frontend
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
-});
-
-// Iniciar servidor
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor listo en Cleavr (Modo Mock - Sin DB)`);
-    console.log(`🔗 URL: http://localhost:${PORT}`);
-    console.log(`👤 Usuario de prueba: admin@test.com / admin123`);
-});
+try {
+    console.log('🚀 Iniciando Servidor de Producción de Tesis Clínica...');
+    require('./server/dist/main');
+} catch (error) {
+    console.error('❌ Error al iniciar el servidor:', error.message);
+    console.error('Asegúrate de haber ejecutado "npm run build" antes de iniciar.');
+    process.exit(1);
+}
