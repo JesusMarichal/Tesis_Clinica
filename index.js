@@ -1,16 +1,17 @@
-/**
- * ENTRY POINT PARA CLEAVR
- * Este archivo redirige la ejecución al servidor NestJS compilado.
- */
-
-// Asegurarse de que el servidor esté compilado antes de ejecutar
-// require('./server/dist/main');
+const path = require('path');
+require('dotenv').config();
 
 try {
-    console.log('🚀 Iniciando Servidor de Producción de Tesis Clínica...');
-    require('./server/dist/main');
+    console.log('🚀 Iniciando Entorno de Producción de Tesis Clínica (Puerto 3000)...');
+
+    // Ruta absoluta para evitar errores en Cleavr
+    const serverPath = path.join(__dirname, 'server', 'dist', 'main');
+
+    console.log(`📂 Cargando servidor desde: ${serverPath}`);
+    require(serverPath);
+
 } catch (error) {
-    console.error('❌ Error al iniciar el servidor:', error.message);
-    console.error('Asegúrate de haber ejecutado "npm run build" antes de iniciar.');
+    console.error('❌ ERROR CRÍTICO AL INICIAR:');
+    console.error(error.stack);
     process.exit(1);
 }
