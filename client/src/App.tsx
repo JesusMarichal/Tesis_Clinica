@@ -1,10 +1,10 @@
-import Login from './components/Login'
+import LoginPage from './views/auth/LoginPage'
 
 function App() {
   return (
     <div className="App">
       <div className="mesh-gradient" />
-      <Login />
+      <LoginPage />
     </div>
   )
 }

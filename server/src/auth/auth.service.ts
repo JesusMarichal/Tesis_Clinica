@@ -1,22 +1,23 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { AuthResponse } from './interfaces/auth-response.interface';
 
 @Injectable()
 export class AuthService {
-    // Mock User
+    // Mock User (Layer Model in MVC context)
     private readonly mockUser = {
         id: 1,
         email: 'admin@test.com',
         name: 'Admin Clinica',
-        password: '', // Will be hashed admin123
+        password: '', // admin123
     };
 
     constructor(private readonly jwtService: JwtService) {
         this.mockUser.password = bcrypt.hashSync('admin123', 10);
     }
 
-    async login(email: string, pass: string) {
+    async login(email: string, pass: string): Promise<AuthResponse> {
         if (email !== this.mockUser.email) {
             throw new UnauthorizedException('Credenciales inválidas');
         }
@@ -27,6 +28,7 @@ export class AuthService {
         }
 
         const payload = { sub: this.mockUser.id, email: this.mockUser.email };
+
         return {
             access_token: await this.jwtService.signAsync(payload),
             user: {
