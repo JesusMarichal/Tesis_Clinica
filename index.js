@@ -2,7 +2,8 @@ const path = require('path');
 require('dotenv').config();
 
 try {
-    console.log('🚀 Iniciando Entorno de Producción de Tesis Clínica (Puerto 3000)...');
+    const port = process.env.PORT || 3000;
+    console.log(`🚀 Iniciando Entorno de Producción de Tesis Clínica (Puerto ${port})...`);
 
     // Ruta absoluta para evitar errores en Cleavr
     const serverPath = path.join(__dirname, 'server', 'dist', 'main');
